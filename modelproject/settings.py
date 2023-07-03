@@ -91,14 +91,16 @@ WSGI_APPLICATION = 'modelproject.wsgi.application'
 #     }
 # }
 
+from decouple import config
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'test',
-        'USER': 'root',
-        'PASSWORD': '0714',
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
         'HOST': 'svc.sel4.cloudtype.app',
-        'PORT': '32039'
+        'PORT': config('DB_PORT'),
     }
 }
 
