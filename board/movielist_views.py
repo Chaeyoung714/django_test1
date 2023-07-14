@@ -17,6 +17,8 @@ class MovieListGet(ListAPIView):
     authentication_classes = [BasicAuthentication]
     permission_classes = [AllowAny]
 
+    # paginate_by = 5
+
     def perform_create(self, serializer):
         user = self.request.user
         serializer.save(user = user)
