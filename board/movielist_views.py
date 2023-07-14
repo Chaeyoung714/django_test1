@@ -17,7 +17,13 @@ class MovieListGet(ListAPIView):
     authentication_classes = [BasicAuthentication]
     permission_classes = [AllowAny]
 
-    # paginate_by = 5
+    # def get_queryset(self, request):
+    #     search_keyword = self.request.GET.get('title', "") #post로 값이 들어와야 함 
+    #     if search_keyword:
+    #         movies = movies.filter(title__icontains=search_keyword)
+    #         return render(request, {'movies':movies, 'q':search_keyword})
+
+    paginate_by = 5
 
     def perform_create(self, serializer):
         user = self.request.user
