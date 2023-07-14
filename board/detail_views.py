@@ -8,7 +8,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
-class MovieDetail(ListCreateAPIView):
+class MovieDetailView(ListCreateAPIView):
     queryset = MovieDetail.objects.all()
     serializer_class = MovieDetailSerializer
     authentication_classes = [BasicAuthentication, SessionAuthentication]

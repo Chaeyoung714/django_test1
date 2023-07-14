@@ -24,4 +24,5 @@ class MovieDetail(models.Model):
     summary = models.TextField()
 
     def __str__(self):
-        return self.title
+        return self.title_kor
+    
