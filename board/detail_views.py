@@ -3,9 +3,9 @@ from .serializers import MovieDetailSerializer
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView, ListAPIView
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 import requests
 
 @api_view(["GET"])
@@ -31,6 +31,7 @@ def init_db(request):
         staffs = movie['staff']
         for staff in staffs:
             staff1 = Staff()
+            # staff1.movie_id = movie['id']
             staff1.name = staff['name']
             staff1.role = staff['role']
             staff1.image_url = staff['image_url']
@@ -42,4 +43,4 @@ class MovieDetailView(RetrieveAPIView):
     queryset = MovieDetail.objects.all()
     serializer_class = MovieDetailSerializer
     authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]

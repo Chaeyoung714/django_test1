@@ -1,8 +1,13 @@
 from rest_framework import serializers
-from .models import MovieDetail, Staff, Comment
+from .models import *
+
+class MovieListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MovieDetail
+        fields = ['title_kor', 'poster_url']
 
 class CommentSerializer(serializers.ModelSerializer):
-    user = serializers.CharField(source='user.nickname', read_only=True)
+    # user = serializers.CharField(source='user.nickname', read_only=True)
     
     class Meta:
         model = Comment
@@ -19,5 +24,5 @@ class MovieDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MovieDetail
-        fields = ['id', 'title_kor', 'title_eng', 'poster_url', 'rating_aud', 'rating_cri', 'rating_net', 'genre', 'showtimes', 'release_date', 'rate', 'summary', 'comments']    #'staffs', 'comments' 안넣음
+        fields = ['id', 'title_kor', 'title_eng', 'poster_url', 'rating_aud', 'rating_cri', 'rating_net', 'genre', 'showtimes', 'release_date', 'rate', 'summary', 'staffs']    #'staffs', 'comments' 안넣음
         # read_only_fields = ['user']   #읽는 것만 가능
