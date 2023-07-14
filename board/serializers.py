@@ -3,8 +3,8 @@ from .models import *
 
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MovieDetail
-        fields = ['title_kor', 'poster_url']
+        model = MovieList
+        fields = ['id', 'title_kor', 'title_eng', 'poster_url', 'rating_aud', 'rating_cri', 'rating_net', 'genre', 'showtimes', 'release_date', 'rate', 'summary', 'staff']
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -21,13 +21,14 @@ class StaffSerializer(serializers.ModelSerializer):
         model = Staff
         fields = ['id', 'movie_id', 'name', 'role', 'image_url']
 
+
 class MovieDetailSerializer(serializers.ModelSerializer):
-    staffs = StaffSerializer(many=True)
+    staff = StaffSerializer(many=True)
     # comments = CommentSerializer(many=True)
 
     class Meta:
         model = MovieDetail
-        fields = ['id', 'title_kor', 'title_eng', 'poster_url', 'rating_aud', 'rating_cri', 'rating_net', 'genre', 'showtimes', 'release_date', 'rate', 'summary', 'staffs']    #'staffs', 'comments' 안넣음
+        fields = ['id', 'title_kor', 'title_eng', 'poster_url', 'rating_aud', 'rating_cri', 'rating_net', 'genre', 'showtimes', 'release_date', 'rate', 'summary', 'staff']    #'staffs', 'comments' 안넣음
         # read_only_fields = ['user']   #읽는 것만 가능
 
 

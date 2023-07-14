@@ -1,4 +1,4 @@
-from .models import MovieDetail, Staff
+from .models import MovieDetail, Staff, MovieList
 from .serializers import MovieDetailSerializer
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
@@ -14,7 +14,7 @@ def init_db(request):
     res = requests.get(url)
     movies = res.json()['movies']
     for movie in movies:
-        movie1 = MovieDetail()
+        movie1 = MovieList()
         movie1.title_kor = movie['title_kor']
         movie1.title_eng = movie['title_eng']
         movie1.poster_url = movie['poster_url']
@@ -28,10 +28,10 @@ def init_db(request):
         
         movie1.save()
 
-        staffs = movie['staff']
-        for staff in staffs:
+        staffset = movie['staff']
+        for staff in staffset:
             staff1 = Staff()
-            staff1.movie_id = movie1
+            # staff1.movie_id = movie1
             staff1.name = staff['name']
             staff1.role = staff['role']
             staff1.image_url = staff['image_url']
@@ -40,8 +40,9 @@ def init_db(request):
     return Response(status=status.HTTP_200_OK)
 
 class MovieDetailView(RetrieveAPIView):
-    queryset = MovieDetail.objects.all()
+    queryset = MovieList.objects.all()
     serializer_class = MovieDetailSerializer
     authentication_classes = [BasicAuthentication, SessionAuthentication]
     permission_classes = [AllowAny]
+    # lookup_url_kwarg = 'id'
 
