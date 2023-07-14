@@ -1,8 +1,8 @@
-from django.urls import path, include
-from .views import *
 
-app_name  = 'accounts'
+from django.urls import path
+from . import views
+
+app_name = 'accounts'
 
 urlpatterns = [
-
 ]
