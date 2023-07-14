@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import MovieList
+from .models import MovieDetail
 from .serializers import MovieListSerializer
 
 from rest_framework.response import Response
@@ -12,7 +12,7 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import AllowAny
 
 class MovieListGet(ListAPIView):
-    queryset = MovieList.objects.all()
+    queryset = MovieDetail.objects.all()
     serializer_class = MovieListSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [AllowAny]
