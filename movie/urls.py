@@ -21,5 +21,6 @@ from board.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('board/', include('board.urls')),
-    path('accounts/', include('accounts.urls'))
+    path('accounts/', include('dj_rest_auth.urls')),
+    path('accounts/signup/', include('dj_rest_auth.registration.urls')),
 ]

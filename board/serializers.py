@@ -6,6 +6,7 @@ class MovieListSerializer(serializers.ModelSerializer):
         model = MovieDetail
         fields = ['title_kor', 'poster_url']
 
+
 class CommentSerializer(serializers.ModelSerializer):
     # user = serializers.CharField(source='user.nickname', read_only=True)
     
@@ -26,3 +27,8 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         model = MovieDetail
         fields = ['id', 'title_kor', 'title_eng', 'poster_url', 'rating_aud', 'rating_cri', 'rating_net', 'genre', 'showtimes', 'release_date', 'rate', 'summary', 'staffs']    #'staffs', 'comments' 안넣음
         # read_only_fields = ['user']   #읽는 것만 가능
+
+
+
+
+
