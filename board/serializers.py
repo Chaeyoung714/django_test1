@@ -15,9 +15,11 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'created_at', 'comment']
 
 class StaffSerializer(serializers.ModelSerializer):
+    movie_id = serializers.ReadOnlyField(source="movie_id.title_kor")
+
     class Meta:
         model = Staff
-        fields = ['id', 'name', 'role', 'image_url']
+        fields = ['id', 'movie_id', 'name', 'role', 'image_url']
 
 class MovieDetailSerializer(serializers.ModelSerializer):
     staffs = StaffSerializer(many=True)

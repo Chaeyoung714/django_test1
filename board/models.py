@@ -1,11 +1,19 @@
 from django.db import models
+
+class MovieList(models.Model):
+    title_kor = models.CharField(max_length=100)
+    title_eng = models.CharField(max_length=100)
+    poster_url = models.CharField(max_length=200, blank = False)
+
+    def __str__(self):
+        return self.title_kor
     
 class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     comment = models.TextField()
 
 class Staff(models.Model):
-    # movie_id = models.CharField(null=True,)
+    movie_id = models.ForeignKey(MovieList, null=True,on_delete=models.CASCADE) #related_name='movie_id'
     name = models.CharField(null=True, max_length=100)
     role = models.CharField(null=True, max_length=100)
     image_url = models.CharField(null=True, max_length=256)
@@ -32,10 +40,3 @@ class MovieDetail(models.Model):
         return self.title_kor
     
 
-class MovieList(models.Model):
-    title_kor = models.CharField(max_length=100)
-    title_eng = models.CharField(max_length=100)
-    poster_url = models.CharField(max_length=200, blank = False)
-
-    def __str__(self):
-        return self.title_kor

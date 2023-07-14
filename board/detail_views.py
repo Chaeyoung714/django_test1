@@ -31,7 +31,7 @@ def init_db(request):
         staffs = movie['staff']
         for staff in staffs:
             staff1 = Staff()
-            # staff1.movie_id = movie['id']
+            staff1.movie_id = movie1
             staff1.name = staff['name']
             staff1.role = staff['role']
             staff1.image_url = staff['image_url']
@@ -44,3 +44,4 @@ class MovieDetailView(RetrieveAPIView):
     serializer_class = MovieDetailSerializer
     authentication_classes = [BasicAuthentication, SessionAuthentication]
     permission_classes = [AllowAny]
+
