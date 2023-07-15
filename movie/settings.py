@@ -199,3 +199,5 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
     'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
 }
+
+ALLOWED_HOSTS = ['port-0-minihackathon-backend1-20zynm2mlk2t1xjp.sel4.cloudtype.app', '127.0.0.1']
