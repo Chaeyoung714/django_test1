@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+#추가
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,15 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dzr7cj+2$foylofr8%z-2zb$x$c*-e&bt8+4$mgi^p6d2=c3)o'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['port-0-django-test2-20zynm2mljmm4rvw.sel4.cloudtype.app',
-                 '127.0.0.1'
-                 ]
-
+# ALLOWED_HOSTS = ['port-0-django-test2-20zynm2mljmm4rvw.sel4.cloudtype.app',
+#                  '127.0.0.1'
+#                  ]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -58,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #추가
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'modelproject.urls'
@@ -91,16 +95,19 @@ WSGI_APPLICATION = 'modelproject.wsgi.application'
 #     }
 # }
 
-from decouple import config
+#아래로 수정
+
+import pymysql
+pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'test',
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'svc.sel4.cloudtype.app',
-        'PORT': config('DB_PORT'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('DB_NAME'), # DB(스키마) 이름
+        'USER': config('DB_USER'), # 유저 이름 (root)
+        'PASSWORD': config('DB_PASSWORD'), # DB 비밀번호
+        'HOST': config('DB_HOST'), # DB 주소
+        'PORT': 3306,
     }
 }
 
@@ -208,3 +215,6 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
     'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
 }
+
+#배포 설정
+STATIC_ROOT = BASE_DIR / 'static'
