@@ -97,8 +97,8 @@ WSGI_APPLICATION = 'modelproject.wsgi.application'
 
 #아래로 수정
 
-import pymysql
-pymysql.install_as_MySQLdb()
+# import pymysql
+# pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
